@@ -171,3 +171,15 @@ Retorno esperado:
 	}
 }
 ```
+
+---
+
+# Como iniciar o SpringBoot pelo VSCode
+
+- Instale o JDK 20
+- Abra o VSCode
+- instale as extenções "Extension pack for Java" e "Spring Boot Extension Pack"
+- reinicie o VSCode na pasta raiz do projeto Spring Boot
+- irá aparecer na barra lateral esquerda um icone hexagonal, clique nele
+- espere carregar tudo, ao final irá aparecer um item na lista com o nome do arquivo execultavel do projeto
+ -clique no play único
