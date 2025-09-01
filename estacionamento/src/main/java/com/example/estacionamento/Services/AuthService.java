@@ -42,7 +42,7 @@ public class AuthService {
 
         // Cria um novo objeto de usuário com os dados recebidos
         Usuario user = new Usuario();
-        user.setNome("Usuário"); // Nome fixo por enquanto — pode ser ajustado para vir no request
+        user.setNome(request.getNome()); // Nome fixo por enquanto — pode ser ajustado para vir no request
         user.setEmail(request.getEmail());
 
         // Codifica a senha antes de salvar no banco
