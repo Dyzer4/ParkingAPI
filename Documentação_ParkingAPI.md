@@ -71,6 +71,27 @@ Retorno esperado:
 ]
 ```
 
+### “/auth/me”
+
+Objetivo: Buscar dados do usuario logado.
+
+informação do Header necessaria: 
+
+```
+	Authorization: Bearer <seu_token>
+```
+
+Retorno esperado:
+
+```json
+[
+	{
+		"nome": "aaaaaa aa aaaaaa",
+		"email": "aaaaaaaaa@gmail.com",
+	}
+]
+```
+
 ---
 
 ## POST

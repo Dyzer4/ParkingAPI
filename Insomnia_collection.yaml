@@ -1,0 +1,231 @@
+type: collection.insomnia.rest/5.0
+name: estacionamento
+meta:
+  id: wrk_cb4db08527164e50a3d907d765d485f5
+  created: 1756318506093
+  modified: 1756338442582
+  description: ""
+collection:
+  - url: http://localhost:8080/api/veiculos
+    name: buscar veículos ativos
+    meta:
+      id: req_9708e15fd6e34f6a81cf30ac4b362f2e
+      created: 1756338480005
+      modified: 1756338569807
+      isPrivate: false
+      description: ""
+      sortKey: -1756338480005
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/veiculos/placa/ABC1234
+    name: buscar registros por placa
+    meta:
+      id: req_f91e4ebce9b348c4a386821a21a7642c
+      created: 1756338563471
+      modified: 1756558657406
+      isPrivate: false
+      description: ""
+      sortKey: -1756338563471
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/veiculos/id/1
+    name: buscar registros por id
+    meta:
+      id: req_8c011e8bebb4492bbb904b917cf5ffad
+      created: 1756338597675
+      modified: 1756559315663
+      isPrivate: false
+      description: ""
+      sortKey: -1756338597675
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/veiculos/entrada
+    name: liberar entrada de veiculo
+    meta:
+      id: req_db48c389746f4eff832c706cbf872c13
+      created: 1756338626784
+      modified: 1756859348352
+      isPrivate: false
+      description: ""
+      sortKey: -1756361500581
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"placa": "CCC8888"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.4.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/veiculos/saida
+    name: liberar saida de veiculo
+    meta:
+      id: req_2dbfbbf984e247ca9e03150eb255cd01
+      created: 1756338673810
+      modified: 1756557307565
+      isPrivate: false
+      description: ""
+      sortKey: -1756338673810
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"placa":"ABC1234"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.4.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/auth/register
+    name: cadastro
+    meta:
+      id: req_9f0a93d2724a4ee990b88a3c1b6a7afa
+      created: 1756384327352
+      modified: 1756859054878
+      isPrivate: false
+      description: ""
+      sortKey: -1756384327352
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome":"SUPORTE",
+        	"email": "admin@suporte.com",
+        	"senha": "root"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.5.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/auth/login
+    name: login
+    meta:
+      id: req_58346ad320da4f59b72ad65b6e947428
+      created: 1756384471532
+      modified: 1756859388466
+      isPrivate: false
+      description: ""
+      sortKey: -1756384471532
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@suporte.com",
+        	"senha": "root"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.5.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/auth/me
+    name: buscar dados de usuário logado
+    meta:
+      id: req_9eea6e0fc4cd45c3a46374278b28f846
+      created: 1756859292612
+      modified: 1756859852539
+      isPrivate: false
+      description: ""
+      sortKey: -1756338612229.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.5.0
+        id: pair_d5eb1121df3d4d459a0d153aa3bfbd8c
+      - id: pair_06478739b0744adc90da2601fd69805b
+        name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzdXBvcnRlLmNvbSIsImlhdCI6MTc1Njg1OTQzMiwiZXhwIjoxNzU2ODYzMDMyfQ.dgmfhzk5Ez1BIanby4pzTPDbfQqXcQzmGNUmlwbZsOI
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_f327f22b1e9e95114badd5ea8166292ad422a5cb
+    created: 1756338442628
+    modified: 1756338442628
+environments:
+  name: Base Environment
+  meta:
+    id: env_f327f22b1e9e95114badd5ea8166292ad422a5cb
+    created: 1756318506097
+    modified: 1756338442580
+    isPrivate: false
