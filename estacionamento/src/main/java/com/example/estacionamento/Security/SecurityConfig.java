@@ -104,7 +104,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
 
         // "addAllowedOrigin" não suporta curingas de porta -> trocar por addAllowedOriginPattern
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:*"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
 
