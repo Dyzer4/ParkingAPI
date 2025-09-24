@@ -140,6 +140,12 @@ Retorno esperado:
 
 Objetivo: Liberar a entrada do veículo no estacionamento.
 
+informação do Header necessaria: 
+
+```
+	Authorization: Bearer <seu_token>
+```
+
 Corpo da requisição esperado (O que deverá ser enviado pelo front-end):
 
 ```json
@@ -168,6 +174,12 @@ Retorno esperado:
 ### “/api/veiculos/saida”
 
 Objetivo: Liberar a saída e fazer o calculo do valor a pagar do veículo no estacionamento.
+
+informação do Header necessaria: 
+
+```
+	Authorization: Bearer <seu_token>
+```
 
 Corpo da requisição esperado (O que deverá ser enviado pelo front-end):
 
