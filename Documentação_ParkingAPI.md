@@ -116,6 +116,7 @@ Corpo da requisição esperado (O que deverá ser enviado pelo front-end):
 
 ```json
 {
+	"nome": "a",
 	"email": "a@gmail.com",
 	"senha": "XXXXXXXX"
 }
