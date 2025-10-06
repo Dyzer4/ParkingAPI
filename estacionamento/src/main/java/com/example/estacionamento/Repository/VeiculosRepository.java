@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VeiculosRepository extends JpaRepository<Veiculos, Integer> {
+
     List<Veiculos> findByPlaca(String placa);
 
-    @Query("SELECT v FROM Veiculos v WHERE dataSaida IS NULL")
-    List<Veiculos> findByDataEqualNull();
+    @Query("SELECT v FROM Veiculos v WHERE v.dataSaida IS NULL")
+    List<Veiculos> findByDataSaidaNull();
 
-    @Query("SELECT v FROM Veiculos v WHERE dataSaida IS NULL AND placa = :placa")
+    @Query("SELECT v FROM Veiculos v WHERE v.dataSaida IS NULL AND v.placa = :placa")
     Optional<Veiculos> findByPlacaActive(@Param("placa") String placa);
 }

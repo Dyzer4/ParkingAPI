@@ -17,7 +17,8 @@ public class VeiculosService {
     private VeiculosRepository veiculosRepository;
 
     public List<Veiculos> listarVeiculosAtivos() {
-        return veiculosRepository.findByDataEqualNull();
+        // Confirme que o método se chama findByDataEntradaNull ou similar.
+        return veiculosRepository.findByDataSaidaNull();
     }
 
     public Veiculos buscarPorId(int id) {
@@ -29,11 +30,17 @@ public class VeiculosService {
     }
 
     public VeiculosDTO liberarEntrada(Veiculos veiculo) {
-        veiculo.setDataEntrada(LocalDate.now());
-        veiculo.setHorarioEntrada(LocalTime.now());
+        Optional<Veiculos> veiculoExistente = veiculosRepository.findByPlacaActive(veiculo.getPlaca());
 
-        Veiculos salvo = veiculosRepository.save(veiculo);
-        return convertToDTO(salvo);
+        if (veiculoExistente.isEmpty()) {
+            veiculo.setDataEntrada(LocalDate.now());
+            veiculo.setHorarioEntrada(LocalTime.now());
+
+            Veiculos salvo = veiculosRepository.save(veiculo);
+            return convertToDTO(salvo);
+        } else {
+            throw new RuntimeException("Veículo já está registrado como ativo!");
+        }
     }
 
     public VeiculosDTO liberarSaida(Veiculos veiculos) {
@@ -48,6 +55,7 @@ public class VeiculosService {
         return convertToDTO(salvo);
     }
 
+
     public VeiculosDTO convertToDTO(Veiculos veiculo) {
         return new VeiculosDTO(
                 veiculo.getPlaca(),
@@ -58,5 +66,4 @@ public class VeiculosService {
                 veiculo.getValorPago()
         );
     }
-
 }
