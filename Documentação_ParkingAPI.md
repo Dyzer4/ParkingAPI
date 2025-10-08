@@ -10,12 +10,6 @@ API para gerenciamento de um estacionamento, com cadastro de usuários, login, l
 
 Objetivo: Buscar o registro de veículo pelo ID independente se ja foi liberado a saída ou não.
 
-informação do Header necessaria: 
-
-```
-	Authorization: Bearer <seu_token>
-```
-
 Retorno esperado:
 
 ```json
@@ -33,11 +27,6 @@ Retorno esperado:
 
 Objetivo: Buscar todos os registros relacionados a placa do veículo pesquisado.
 
-informação do Header necessaria: 
-
-```
-	Authorization: Bearer <seu_token>
-```
 
 Retorno esperado:
 
@@ -153,12 +142,6 @@ Retorno esperado:
 
 Objetivo: Liberar a entrada do veículo no estacionamento.
 
-informação do Header necessaria: 
-
-```
-	Authorization: Bearer <seu_token>
-```
-
 Corpo da requisição esperado (O que deverá ser enviado pelo front-end):
 
 ```json
@@ -188,11 +171,6 @@ Retorno esperado:
 
 Objetivo: Liberar a saída e fazer o calculo do valor a pagar do veículo no estacionamento.
 
-informação do Header necessaria: 
-
-```
-	Authorization: Bearer <seu_token>
-```
 
 Corpo da requisição esperado (O que deverá ser enviado pelo front-end):
 
