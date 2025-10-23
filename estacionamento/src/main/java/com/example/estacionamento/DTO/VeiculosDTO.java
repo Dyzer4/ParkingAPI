@@ -1,27 +1,28 @@
 package com.example.estacionamento.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 
 public class VeiculosDTO {
     private String placa;
     private LocalDate dataEntrada;
+
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime horarioEntrada;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate dataSaida;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime horarioSaida;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer valorPago;
 
-    public VeiculosDTO() {
-    }
+    public VeiculosDTO() {}
 
     public VeiculosDTO(String placa, LocalDate dataEntrada, LocalTime horarioEntrada, LocalDate dataSaida, LocalTime horarioSaida, Integer valorPago) {
         this.placa = placa;
@@ -31,8 +32,6 @@ public class VeiculosDTO {
         this.horarioSaida = horarioSaida;
         this.valorPago = valorPago;
     }
-
-    // Getters e Setters
 
     public String getPlaca() {
         return placa;

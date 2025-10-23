@@ -6,19 +6,20 @@ import com.example.estacionamento.Repository.VeiculosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class VeiculosService {
+
     @Autowired
     private VeiculosRepository veiculosRepository;
 
+    private static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
+
     public List<Veiculos> listarVeiculosAtivos() {
-        // Confirme que o método se chama findByDataEntradaNull ou similar.
-        return veiculosRepository.findByDataSaidaNull();
+        return veiculosRepository.findByHorarioSaidaNull();
     }
 
     public Veiculos buscarPorId(int id) {
@@ -30,31 +31,31 @@ public class VeiculosService {
     }
 
     public VeiculosDTO liberarEntrada(Veiculos veiculo) {
-        Optional<Veiculos> veiculoExistente = veiculosRepository.findByPlacaActive(veiculo.getPlaca());
-
-        if (veiculoExistente.isEmpty()) {
-            veiculo.setDataEntrada(LocalDate.now());
-            veiculo.setHorarioEntrada(LocalTime.now());
-
-            Veiculos salvo = veiculosRepository.save(veiculo);
-            return convertToDTO(salvo);
-        } else {
+        // Impede entrada duplicada (veículo ativo)
+        if (veiculosRepository.existsByPlacaAndHorarioSaidaNull(veiculo.getPlaca())) {
             throw new RuntimeException("Veículo já está registrado como ativo!");
         }
-    }
 
-    public VeiculosDTO liberarSaida(Veiculos veiculos) {
-        Veiculos veiculo = veiculosRepository.findByPlacaActive(veiculos.getPlaca())
-                .orElseThrow(() -> new RuntimeException("Veículo não encontrado!"));
-
-        veiculo.setDataSaida(LocalDate.now());
-        veiculo.setHorarioSaida(LocalTime.now());
-        veiculo.calcularValor(10);
+        LocalDateTime agora = LocalDateTime.now(ZONE_ID);
+        veiculo.setDataEntrada(agora.toLocalDate());
+        veiculo.setHorarioEntrada(agora.toLocalTime());
 
         Veiculos salvo = veiculosRepository.save(veiculo);
         return convertToDTO(salvo);
     }
 
+    public VeiculosDTO liberarSaida(Veiculos veiculos) {
+        Veiculos veiculo = veiculosRepository.findByPlacaAndHorarioSaidaNull(veiculos.getPlaca())
+                .orElseThrow(() -> new RuntimeException("Veículo não encontrado ou já saiu!"));
+
+        LocalDateTime agora = LocalDateTime.now(ZONE_ID);
+        veiculo.setDataSaida(agora.toLocalDate());
+        veiculo.setHorarioSaida(agora.toLocalTime());
+        veiculo.calcularValor(10);
+
+        Veiculos salvo = veiculosRepository.save(veiculo);
+        return convertToDTO(salvo);
+    }
 
     public VeiculosDTO convertToDTO(Veiculos veiculo) {
         return new VeiculosDTO(

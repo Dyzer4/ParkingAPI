@@ -1,7 +1,6 @@
 package com.example.estacionamento.Entity;
 
 import jakarta.persistence.*;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,8 +31,7 @@ public class Veiculos {
     @Column
     private Integer valorPago;
 
-    public Veiculos() {
-    }
+    public Veiculos() {}
 
     public Veiculos(String placa, LocalTime horarioEntrada, LocalDate dataEntrada, LocalTime horarioSaida, LocalDate dataSaida, Integer valorPago) {
         this.placa = placa;
@@ -44,61 +42,21 @@ public class Veiculos {
         this.valorPago = valorPago;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public LocalTime getHorarioEntrada() {
-        return horarioEntrada;
-    }
-
-    public void setHorarioEntrada(LocalTime horarioEntrada) {
-        this.horarioEntrada = horarioEntrada;
-    }
-
-    public LocalDate getDataEntrada() {
-        return dataEntrada;
-    }
-
-    public void setDataEntrada(LocalDate dataEntrada) {
-        this.dataEntrada = dataEntrada;
-    }
-
-    public LocalTime getHorarioSaida() {
-        return horarioSaida;
-    }
-
-    public void setHorarioSaida(LocalTime horarioSaida) {
-        this.horarioSaida = horarioSaida;
-    }
-
-    public LocalDate getDataSaida() {
-        return dataSaida;
-    }
-
-    public void setDataSaida(LocalDate dataSaida) {
-        this.dataSaida = dataSaida;
-    }
-
-    public Integer getValorPago() {
-        return valorPago;
-    }
-
-    public void setValorPago(Integer valorPago) {
-        this.valorPago = valorPago;
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getPlaca() { return placa; }
+    public void setPlaca(String placa) { this.placa = placa; }
+    public LocalTime getHorarioEntrada() { return horarioEntrada; }
+    public void setHorarioEntrada(LocalTime horarioEntrada) { this.horarioEntrada = horarioEntrada; }
+    public LocalDate getDataEntrada() { return dataEntrada; }
+    public void setDataEntrada(LocalDate dataEntrada) { this.dataEntrada = dataEntrada; }
+    public LocalTime getHorarioSaida() { return horarioSaida; }
+    public void setHorarioSaida(LocalTime horarioSaida) { this.horarioSaida = horarioSaida; }
+    public LocalDate getDataSaida() { return dataSaida; }
+    public void setDataSaida(LocalDate dataSaida) { this.dataSaida = dataSaida; }
+    public Integer getValorPago() { return valorPago; }
+    public void setValorPago(Integer valorPago) { this.valorPago = valorPago; }
 
     public void calcularValor(int valorHora) {
         if (dataEntrada != null && horarioEntrada != null &&
@@ -112,7 +70,7 @@ public class Veiculos {
             int horasCobradas = (int) Math.ceil(minutos / 60.0);
 
             if (horasCobradas == 0) {
-                this.valorPago = 1 * valorHora;
+                this.valorPago = valorHora;
             } else {
                 this.valorPago = horasCobradas * valorHora;
             }

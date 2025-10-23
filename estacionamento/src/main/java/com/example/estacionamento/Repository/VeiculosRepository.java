@@ -12,9 +12,14 @@ public interface VeiculosRepository extends JpaRepository<Veiculos, Integer> {
 
     List<Veiculos> findByPlaca(String placa);
 
-    @Query("SELECT v FROM Veiculos v WHERE v.dataSaida IS NULL")
-    List<Veiculos> findByDataSaidaNull();
+    // Lista veículos ativos (saída ainda não registrada)
+    @Query("SELECT v FROM Veiculos v WHERE v.horarioSaida IS NULL")
+    List<Veiculos> findByHorarioSaidaNull();
 
-    @Query("SELECT v FROM Veiculos v WHERE v.dataSaida IS NULL AND v.placa = :placa")
-    Optional<Veiculos> findByPlacaActive(@Param("placa") String placa);
+    // Busca veículo ativo por placa
+    @Query("SELECT v FROM Veiculos v WHERE v.horarioSaida IS NULL AND v.placa = :placa")
+    Optional<Veiculos> findByPlacaAndHorarioSaidaNull(@Param("placa") String placa);
+
+    // Checa se veículo ativo existe
+    boolean existsByPlacaAndHorarioSaidaNull(String placa);
 }
