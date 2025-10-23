@@ -1,5 +1,6 @@
 package com.example.estacionamento.Services;
 
+import com.example.estacionamento.DTO.UsuarioDTO;
 import com.example.estacionamento.Auth.AuthRequest;
 import com.example.estacionamento.Auth.JwtUtil;
 import com.example.estacionamento.Entity.Usuario;
@@ -42,5 +43,19 @@ public class AuthService {
         }
 
         return jwtUtil.generateToken(u.getEmail());
+    }
+
+
+
+    public UsuarioDTO getUserFromToken(String token) {
+        // Extrai email do token
+        String email = jwtUtil.extractUsername(token);
+
+        // Busca usuário no banco
+        Usuario u = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+
+        // Retorna um DTO sem a senha
+        return new UsuarioDTO(u.getNome(), u.getEmail());
     }
 }

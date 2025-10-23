@@ -3,6 +3,7 @@ package com.example.estacionamento.Controller;
 import com.example.estacionamento.Auth.AuthRequest;
 import com.example.estacionamento.Auth.AuthResponse;
 import com.example.estacionamento.DTO.ErrorResponse;
+import com.example.estacionamento.DTO.UsuarioDTO;
 import com.example.estacionamento.Exception.UserNotFoundException;
 import com.example.estacionamento.Services.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,36 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getMe(@RequestHeader("Authorization") String authHeader) {
+        try {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                throw new RuntimeException("Token não fornecido");
+            }
+
+            String token = authHeader.substring(7);
+            UsuarioDTO user = authService.getUserFromToken(token);
+
+            return ResponseEntity.ok(user);
+        } catch (UserNotFoundException ex) {
+            ErrorResponse error = new ErrorResponse(
+                    HttpStatus.NOT_FOUND.value(),
+                    "Usuário não encontrado",
+                    ex.getMessage(),
+                    "/auth/me"
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        } catch (Exception ex) {
+            ErrorResponse error = new ErrorResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Erro interno",
+                    ex.getMessage(),
+                    "/auth/me"
+            );
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
 
     // Cadastro
     @PostMapping("/register")
